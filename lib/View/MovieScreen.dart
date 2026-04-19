@@ -25,7 +25,7 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SERIES', style: TextStyle(color: Colors.white70)),
+        title: const Text('movies', style: TextStyle(color: Colors.white70)),
         actions: [
           IconButton(
             onPressed: () {},
