@@ -1,14 +1,19 @@
+import 'package:api_calling/View/LoginScreen.dart';
 import 'package:api_calling/View/MovieScreen.dart';
+import 'package:api_calling/Service/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Provider/MovieProvider.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isLoggedIn = await AuthService.isLoggedIn();
+  runApp(MainApp(isLoggedIn: isLoggedIn));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final bool isLoggedIn;
+  const MainApp({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class MainApp extends StatelessWidget {
             titleLarge: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        home: const MovieScreen(),
+        home: isLoggedIn ? const MovieScreen() : const LoginScreen(),
       ),
     );
   }

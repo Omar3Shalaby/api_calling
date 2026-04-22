@@ -4,6 +4,8 @@ import '../Provider/MovieProvider.dart';
 import '../Controller/MovieController.dart';
 import '../Model/MovieModel.dart' as model;
 import 'MovieDetailScreen.dart';
+import '../Service/AuthService.dart';
+import 'LoginScreen.dart';
 
 class MovieScreen extends StatefulWidget {
   const MovieScreen({super.key});
@@ -25,6 +27,17 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () async {
+            await AuthService.logout();
+            if (!mounted) return;
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          },
+          icon: const Icon(Icons.logout, color: Colors.white70),
+        ),
         title: const Text('SERIES', style: TextStyle(color: Colors.white70)),
         actions: [
           IconButton(
